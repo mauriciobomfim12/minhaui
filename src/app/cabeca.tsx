@@ -1,16 +1,15 @@
 "use client"
-
 import "./globals.css"
 import style from "./head.module.css"
 import Image from "next/image"
 import Link from "next/link"
 import { MouseEventHandler, RefObject, useRef, useState } from "react"
 import Teste from "./(rotas)/teste/page"
-import Catalogo from "./(rotas)/catalogo/page"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "./GlobalRedux/store"
 import { esconderBotaoPesquisa, increment, mostrarBotaoPesquisa, valorCampoInput } from "./GlobalRedux/reducers/reducers"
 import { useRouter } from 'next/navigation';
+import Catalogo from "./(rotas)/catalogo/page"
 
 export default function BarraMenu(){
 
@@ -35,31 +34,9 @@ export default function BarraMenu(){
         dispatch(valorCampoInput(valoresInput!!))
     }
 
-    function inicia() {
-        pos = 0;
-        anima();
-    }
 
     function mostrarCatalogo():MouseEventHandler<HTMLDivElement> | any{
         dispatch(increment())
-    }
-
-    function anima() {
-        if (pos >= 1300) {
-            num = -1;
-        }
-        else if (pos <= 0) {
-            num = 1;
-        }
-        pos += num * 0.5;
-
-        if (containerInfos.current) {
-            containerInfos.current.style.left = pos + "px";
-        }
-
-        if (pos >= 0 && pos <= 1300) {
-            requestAnimationFrame(anima);
-        }
     }
 
     function mostrarPesquisa(){
@@ -89,8 +66,6 @@ export default function BarraMenu(){
         router.push("/entrar")
     }
 
-    inicia();
-
     return(
         <div>
             <div className={style.centro}>
@@ -116,9 +91,9 @@ export default function BarraMenu(){
                     </div>
                 </div>
 
-                <Teste display={escondeMostraValor} valores={novoFiltro}/>
+                <Teste/>
                 
-                <Catalogo display={count}/>
+                <Catalogo/>
             
                 <div className={style.barraconteudo}>
                     <Link style={{textDecoration:"none"}} href={"/cupons"}>

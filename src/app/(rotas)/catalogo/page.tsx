@@ -1,23 +1,13 @@
 import style from './catalogo.module.css'
 import "../../globals.css"
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '@/app/GlobalRedux/store';
-import { decrement } from '@/app/GlobalRedux/reducers/reducers';
 
-export default function Catalogo(props: {display: React.ReactNode}){
+export default function Catalogo(){
 
-    let dispatch = useDispatch();
-    let count = useSelector((state: RootState) => state.counter.values)
-    
-
-    function saiu(){
-        dispatch(decrement())
-    }
 
     return(
-        <div style={{display: props.display?"block":"none"}} className={style.pagina}>
-            <div onMouseLeave={saiu} className={style.container}>
+        <div style={{display: 0?"block":"none"}} className={style.pagina}>
+            <div className={style.container}>
                 <div className={style.barrinha}></div>
                 <div>
                     <p>Roupas</p>

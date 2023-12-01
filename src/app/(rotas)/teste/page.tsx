@@ -8,7 +8,7 @@ import { dadosRecomendados } from "@/app/page"
 import { RootState } from "@/app/GlobalRedux/store"
 import { useRouter } from 'next/navigation';
 
-export default function BarraPesquisa(props:{display: React.ReactNode, valores: string[]}){
+export default function BarraPesquisa(){
 
     let [produtosPesquisaRecomendados, setProdutosPesquisaRecomendados] = useState<Omit<dadosRecomendados, "tempo" | "quantidade">[]>([])
 
@@ -20,6 +20,8 @@ export default function BarraPesquisa(props:{display: React.ReactNode, valores: 
 
     let dadosReco = useSelector((state: RootState) => state.counter.produtosPesquisaRecomendados)
     let valorCampoInpu = useSelector((state: RootState) => state.counter.valorCampoInput)
+
+    let count = useSelector((state: RootState) => state.counter.values)
 
     useEffect(() => {
         function retornoDadosRecomendados() {
@@ -63,7 +65,7 @@ export default function BarraPesquisa(props:{display: React.ReactNode, valores: 
     }  
 
     return(
-        <div style={{display: props.display?"block":"none"}} className={style.pagina}>
+        <div style={{display: count?"block":"none"}} className={style.pagina}>
             <div onClick={bloquearClick} className={style.recomendacoes}>
                 {produtosPesquisaRecomendados.map((v, i)=>{
                     return(
